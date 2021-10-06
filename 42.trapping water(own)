@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int pre=0,suf=0;
+        int n=height.size(); 
+        int maxright[n],maxleft[n];
+        
+        for(int i=0;i<n;i++)
+        {
+            if(height[i]>=pre)
+            {
+                pre=height[i];
+            }
+            maxleft[i]=pre;
+        }
+        for(int i=n-1;i>=0;i--)
+        {
+            if(height[i]>=suf)
+            {
+                suf=height[i];
+            }
+            maxright[i]=suf;
+        }
+        int res=0;
+        for(int i=0;i<n;i++)
+        {
+            res=res+min(maxright[i],maxleft[i])-height[i];
+        }
+        return res;
+    }
+};
